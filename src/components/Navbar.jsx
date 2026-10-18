@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <header className="w-full border-b border-[#e8e7e3] bg-[#fdfcf9]">
       {/* ================= DESKTOP / TABLET HEADER ================= */}
-      <div className="mx-auto flex h-[78px] items-center px-4 sm:px-6 lg:h-[108px] lg:px-10 xl:px-14">
+      <div className="mx-auto flex h-[78px] items-center gap-3 px-4 sm:px-6 lg:h-[108px] lg:px-10 xl:px-14">
 
         {/* LOGO */}
         <Link
@@ -142,7 +142,7 @@ const Navbar = () => {
       {/* ================= MOBILE MENU ================= */}
       {isMenuOpen && (
         <div className="border-t border-[#e8e7e3] bg-[#fdfcf9] px-5 py-5 lg:hidden">
-          
+
           {/* Mobile Search */}
           <div className="mb-5 flex h-[46px] w-full items-center rounded-full border border-[#dededb] bg-white px-4">
             <FiSearch className="mr-3 text-[20px] text-[#737875]" />
