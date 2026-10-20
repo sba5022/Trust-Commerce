@@ -11,10 +11,23 @@ import {
 } from "react-icons/fi";
 import { TbLeaf } from "react-icons/tb";
 import { useState } from "react";
-
+import { usePathname } from "next/navigation";
 const Navbar = () => {
+   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Shop", href: "/shop" },
+    { name: "Categories", href: "/categories" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const isActive = (href) =>
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
   return (
     <header className="w-full border-b border-[#e8e7e3] bg-[#fdfcf9]">
       {/* ================= DESKTOP / TABLET HEADER ================= */}
@@ -36,45 +49,30 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* DESKTOP NAVIGATION */}
-        <nav className="ml-6 hidden h-full items-center gap-6 lg:flex xl:ml-8 xl:gap-9">
-          <Link
-            href="/"
-            className="relative flex h-full items-center text-[17px] font-medium text-[#333a36] xl:text-[18px]"
-          >
-            Home
+       <nav className="ml-6 hidden h-full items-center gap-6 lg:flex xl:ml-8 xl:gap-9">
+  {navLinks.map((link) => (
+    <Link
+      key={link.href}
+      href={link.href}
+      aria-current={isActive(link.href) ? "page" : undefined}
+      className={`relative flex h-full items-center text-[17px] font-medium transition-colors duration-200 xl:text-[18px] ${
+        isActive(link.href)
+          ? "text-[#173f32]"
+          : "text-[#5c625f] hover:text-[#173f32]"
+      }`}
+    >
+      {link.name}
 
-            <span className="absolute bottom-[30px] left-0 h-[2px] w-full bg-[#164536]" />
-          </Link>
-
-          <Link
-            href="/shop"
-            className="text-[17px] font-medium text-[#5c625f] transition hover:text-[#173f32] xl:text-[18px]"
-          >
-            Shop
-          </Link>
-
-          <Link
-            href="/categories"
-            className="text-[17px] font-medium text-[#5c625f] transition hover:text-[#173f32] xl:text-[18px]"
-          >
-            Categories
-          </Link>
-
-          <Link
-            href="/about"
-            className="text-[17px] font-medium text-[#5c625f] transition hover:text-[#173f32] xl:text-[18px]"
-          >
-            About
-          </Link>
-
-          <Link
-            href="/contact"
-            className="text-[17px] font-medium text-[#5c625f] transition hover:text-[#173f32] xl:text-[18px]"
-          >
-            Contact
-          </Link>
-        </nav>
+      <span
+        className={`absolute bottom-[30px] left-0 h-[2px] w-full bg-[#164536] transition-all duration-300 ${
+          isActive(link.href)
+            ? "scale-x-100 opacity-100"
+            : "scale-x-0 opacity-0"
+        }`}
+      />
+    </Link>
+  ))}
+</nav>
 
         {/* ================= RIGHT SIDE ================= */}
         <div className="ml-auto flex items-center gap-3 sm:gap-4 lg:gap-5 xl:gap-7">
