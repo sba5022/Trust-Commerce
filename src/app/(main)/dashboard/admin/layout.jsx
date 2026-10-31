@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { AdminDashboardSidebar } from "@/components/dashboard/AdminDashboardSidebar";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
 
 const AdminDashboardLayout = ({ children }) => {
   const router = useRouter();
@@ -72,7 +72,7 @@ const AdminDashboardLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen bg-background">
       
-      <AdminDashboardSidebar />
+      <DashboardSidebar/>
 
       <main className="flex-1 p-6 md:p-10">
         

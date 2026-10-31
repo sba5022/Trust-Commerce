@@ -13,9 +13,11 @@ import { TbLeaf } from "react-icons/tb";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 const Navbar = () => {
-   const pathname = usePathname();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+// const dashboardLink = isAdmin
+//   ? "/dashboard/admin"
+//   : "/dashboard";
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
@@ -49,30 +51,28 @@ const Navbar = () => {
           </span>
         </Link>
 
-       <nav className="ml-6 hidden h-full items-center gap-6 lg:flex xl:ml-8 xl:gap-9">
-  {navLinks.map((link) => (
-    <Link
-      key={link.href}
-      href={link.href}
-      aria-current={isActive(link.href) ? "page" : undefined}
-      className={`relative flex h-full items-center text-[17px] font-medium transition-colors duration-200 xl:text-[18px] ${
-        isActive(link.href)
-          ? "text-[#173f32]"
-          : "text-[#5c625f] hover:text-[#173f32]"
-      }`}
-    >
-      {link.name}
+        <nav className="ml-6 hidden h-full items-center gap-6 lg:flex xl:ml-8 xl:gap-9">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`relative flex h-full items-center text-[17px] font-medium transition-colors duration-200 xl:text-[18px] ${isActive(link.href)
+                  ? "text-[#173f32]"
+                  : "text-[#5c625f] hover:text-[#173f32]"
+                }`}
+            >
+              {link.name}
 
-      <span
-        className={`absolute bottom-[30px] left-0 h-[2px] w-full bg-[#164536] transition-all duration-300 ${
-          isActive(link.href)
-            ? "scale-x-100 opacity-100"
-            : "scale-x-0 opacity-0"
-        }`}
-      />
-    </Link>
-  ))}
-</nav>
+              <span
+                className={`absolute bottom-[30px] left-0 h-[2px] w-full bg-[#164536] transition-all duration-300 ${isActive(link.href)
+                    ? "scale-x-100 opacity-100"
+                    : "scale-x-0 opacity-0"
+                  }`}
+              />
+            </Link>
+          ))}
+        </nav>
 
         {/* ================= RIGHT SIDE ================= */}
         <div className="ml-auto flex items-center gap-3 sm:gap-4 lg:gap-5 xl:gap-7">
@@ -122,38 +122,38 @@ const Navbar = () => {
             <FiUser className="text-[21px] text-[#53605a] lg:text-[23px]" />
           </button> */}
           <div className="dropdown dropdown-end hidden sm:block">
-  <button
-    tabIndex={0}
-    role="button"
-    aria-label="Account menu"
-    className="flex h-[44px] w-[44px] items-center justify-center rounded-full border border-[#e1e1de] bg-[#fafaf8] transition hover:border-[#1b4535] hover:bg-[#f0f3ef] lg:h-[48px] lg:w-[48px]"
-  >
-    <FiUser className="text-[21px] text-[#53605a] lg:text-[23px]" />
-  </button>
+            <button
+              tabIndex={0}
+              role="button"
+              aria-label="Account menu"
+              className="flex h-[44px] w-[44px] items-center justify-center rounded-full border border-[#e1e1de] bg-[#fafaf8] transition hover:border-[#1b4535] hover:bg-[#f0f3ef] lg:h-[48px] lg:w-[48px]"
+            >
+              <FiUser className="text-[21px] text-[#53605a] lg:text-[23px]" />
+            </button>
 
-  <ul
-    tabIndex={0}
-    className="dropdown-content menu z-[100] mt-3 w-52 rounded-xl border border-[#e5e5e1] bg-white p-2 shadow-lg"
-  >
-    <li>
-      <Link
-        href="/login"
-        className="rounded-lg px-4 py-3 text-sm font-medium text-[#063a2a] hover:bg-[#f1f4f1]"
-      >
-        Sign In
-      </Link>
-    </li>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu z-[100] mt-3 w-52 rounded-xl border border-[#e5e5e1] bg-white p-2 shadow-lg"
+            >
+              <li>
+                <Link
+                  href="/login"
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-[#063a2a] hover:bg-[#f1f4f1]"
+                >
+                  Sign In
+                </Link>
+              </li>
 
-    <li>
-      <Link
-        href="/signup"
-        className="rounded-lg px-4 py-3 text-sm font-medium text-[#063a2a] hover:bg-[#f1f4f1]"
-      >
-        Dashboard
-      </Link>
-    </li>
-  </ul>
-</div>
+              <li>
+                <Link
+                  href="/admin"
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-[#063a2a] hover:bg-[#f1f4f1]"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            </ul>
+          </div>
 
           {/* MOBILE MENU BUTTON */}
           <button
